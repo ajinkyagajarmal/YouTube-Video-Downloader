@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YouTube Downloader</title>
+</head>
+<body>
+    <h1><b>YouTube Video Downloader</b></h1>
+    
+        <div class="container">
+            <form method="post">
+                <center><h4><label for="link">Enter YouTube Video URL :</label></h4></center>
+                <input type="text" placeholder="Enter YouTube Video Link Here" label="Enter YouTube Link Here" name="link" required>
+                <center><button type="submit">Download</button></center>
+            </form>
+                {% if title %}
+                <p>Title: {{ title }}</p>
+                <p>Views: {{ views }}</p>
+                <p>Channel: {{ channel }}</p>
+                <p>{{ message }}</p>
+                {% endif %}
+                {% if error %}
+                <p style="color: red;">Error: The Video at {{ error }}</p>
+                {% endif %}
+        </div>
+        
+        <element class ="footer">&copy; Copyright 2023 HTML.CSS</element>
+
+
+
+   
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color:antiquewhite;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+
+        form {
+            margin-top: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            box-sizing: border-box;
+            margin-bottom: 15px;
+        }
+
+        button {
+            background-color: #4CAF50;
+            /* position: fixed; */
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        p {
+            margin-bottom: 10px;
+        }
+
+        .error {
+            color: red;
+        }
+
+        .footer {
+            position:fixed;
+            left: 0;
+            bottom: 50px;
+            width: 100%;
+            /* background-color: red; */
+            color: black;
+            text-align: center;
+        }
+
+        @media screen and (max-width: 600px){
+        input {
+            width: calc(100% - 20px);
+        }   
+    }
+
+    </style>
+</body>
+</html>
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YouTube Downloader</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>YouTube Downloader</h1>
+        <form id="downloadForm">
+            <label for="link">Enter YouTube Video URL:</label>
+            <input type="text" id="link" name="link" required>
+            <button type="button" onclick="downloadVideo()">Download</button>
+            <div id="downloadingIndicator" style="display: none;">Downloading...</div>
+        </form>
+        <div id="downloadResult">
+            {% if title %}
+                <p>Title: {{ title }}</p>
+                <p>Views: {{ views }}</p>
+                <p>{{ message }}</p>
+            {% endif %}
+            {% if error %}
+                <p class="error">Error: {{ error }}</p>
+            {% endif %}
+        </div>
+    </div>
+
+    <script>
+        async function downloadVideo() {
+            const linkInput = document.getElementById('link');
+            const downloadingIndicator = document.getElementById('downloadingIndicator');
+            const downloadResult = document.getElementById('downloadResult');
+
+            downloadingIndicator.style.display = 'block';
+            downloadResult.innerHTML = '';
+
+            try {
+                const response = await fetch('/download', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ link: linkInput.value }),
+                });
+
+                const data = await response.json();
+
+                if (data.error) {
+                    downloadResult.innerHTML = `<p class="error">Error: ${data.error}</p>`;
+                } else {
+                    downloadResult.innerHTML = `
+                        <p>Title: ${data.title}</p>
+                        <p>Views: ${data.views}</p>
+                        <p>${data.message}</p>
+                        <p>Download successful!</p>`;
+                }
+            } catch (error) {
+                downloadResult.innerHTML = `<p class="error">Error: ${error.message}</p>`;
+            } finally {
+                downloadingIndicator.style.display = 'none';
+            }
+        }
+    </script>
+    <style>
+        body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+h1 {
+    color: #333;
+}
+
+form {
+    margin-top: 20px;
+    position: relative; /* Added for positioning the downloading indicator */
+}
+
+label {
+    display: block;
+    margin-bottom: 10px;
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+    margin-bottom: 15px;
+}
+
+button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+#downloadingIndicator {
+    display: none;
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: #337ab7;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+#downloadResult {
+    margin-top: 20px;
+}
+
+p {
+    margin-bottom: 10px;
+}
+
+.error {
+    color: red;
+}
+
+@media screen and (max-width: 600px) {
+    input {
+        width: calc(100% - 20px);
+    }
+}
+
+    </style>
+</body>
+</html>
+ -->
